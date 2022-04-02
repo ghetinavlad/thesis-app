@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9215992727E3BE8A0055EE2F /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215992627E3BE8A0055EE2F /* KeyboardHandler.swift */; };
+		923D4AE427E667A900652916 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D4AE327E667A900652916 /* IntroView.swift */; };
+		925C8BFA27DAA24A00ED2403 /* parkingApp_ThesisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8BF927DAA24A00ED2403 /* parkingApp_ThesisApp.swift */; };
+		925C8BFC27DAA24A00ED2403 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8BFB27DAA24A00ED2403 /* ContentView.swift */; };
+		925C8BFE27DAA24C00ED2403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925C8BFD27DAA24C00ED2403 /* Assets.xcassets */; };
+		925C8C0127DAA24C00ED2403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925C8C0027DAA24C00ED2403 /* Preview Assets.xcassets */; };
+		925C8C0B27DAA2D400ED2403 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8C0827DAA2D400ED2403 /* DetailsView.swift */; };
+		925C8C0C27DAA2D400ED2403 /* DetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8C0927DAA2D400ED2403 /* DetailsRepository.swift */; };
+		925C8C0D27DAA2D400ED2403 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8C0A27DAA2D400ED2403 /* DetailsViewModel.swift */; };
+		925C8C1127DAA30200ED2403 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8C1027DAA30200ED2403 /* MapView.swift */; };
+		925C8C1327DAA30800ED2403 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C8C1227DAA30800ED2403 /* SplashScreen.swift */; };
+		925C8C1527DAA51000ED2403 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 925C8C1427DAA51000ED2403 /* GoogleService-Info.plist */; };
+		925C8C1827DAA68A00ED2403 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 925C8C1727DAA68A00ED2403 /* FirebaseFirestore */; };
+		92641F4327DD484B00AE971A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 92641F4227DD484B00AE971A /* FirebaseStorage */; };
+		92641F4527DD484B00AE971A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 92641F4427DD484B00AE971A /* FirebaseStorageCombine-Community */; };
+		92747E2827E6141E0013D823 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92747E2727E6141E0013D823 /* LoadingIndicator.swift */; };
+		9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972227DE16DB0093B922 /* AddSpotView.swift */; };
+		9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972427DE20FC0093B922 /* ImagePicker.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9215992627E3BE8A0055EE2F /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		923D4AE327E667A900652916 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		9257B74427DC075E006C39CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		925C8BF627DAA24A00ED2403 /* parkingApp-Thesis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "parkingApp-Thesis.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		925C8BF927DAA24A00ED2403 /* parkingApp_ThesisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parkingApp_ThesisApp.swift; sourceTree = "<group>"; };
+		925C8BFB27DAA24A00ED2403 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		925C8BFD27DAA24C00ED2403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		925C8C0027DAA24C00ED2403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		925C8C0827DAA2D400ED2403 /* DetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		925C8C0927DAA2D400ED2403 /* DetailsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsRepository.swift; sourceTree = "<group>"; };
+		925C8C0A27DAA2D400ED2403 /* DetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		925C8C1027DAA30200ED2403 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		925C8C1227DAA30800ED2403 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		925C8C1427DAA51000ED2403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92747E2727E6141E0013D823 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		9289972227DE16DB0093B922 /* AddSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotView.swift; sourceTree = "<group>"; };
+		9289972427DE20FC0093B922 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		925C8BF327DAA24A00ED2403 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				925C8C1827DAA68A00ED2403 /* FirebaseFirestore in Frameworks */,
+				92641F4527DD484B00AE971A /* FirebaseStorageCombine-Community in Frameworks */,
+				92641F4327DD484B00AE971A /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		925C8BED27DAA24A00ED2403 = {
+			isa = PBXGroup;
+			children = (
+				925C8BF827DAA24A00ED2403 /* parkingApp-Thesis */,
+				925C8BF727DAA24A00ED2403 /* Products */,
+				92641F4127DD484B00AE971A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		925C8BF727DAA24A00ED2403 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				925C8BF627DAA24A00ED2403 /* parkingApp-Thesis.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		925C8BF827DAA24A00ED2403 /* parkingApp-Thesis */ = {
+			isa = PBXGroup;
+			children = (
+				92747E2627E614030013D823 /* Common */,
+				9289972127DE16BD0093B922 /* AddSpot */,
+				9257B74427DC075E006C39CA /* Info.plist */,
+				9289972427DE20FC0093B922 /* ImagePicker.swift */,
+				925C8C1227DAA30800ED2403 /* SplashScreen.swift */,
+				925C8C1027DAA30200ED2403 /* MapView.swift */,
+				925C8C0727DAA2D400ED2403 /* Details */,
+				925C8BF927DAA24A00ED2403 /* parkingApp_ThesisApp.swift */,
+				925C8BFB27DAA24A00ED2403 /* ContentView.swift */,
+				925C8C1427DAA51000ED2403 /* GoogleService-Info.plist */,
+				925C8BFD27DAA24C00ED2403 /* Assets.xcassets */,
+				925C8BFF27DAA24C00ED2403 /* Preview Content */,
+				9215992627E3BE8A0055EE2F /* KeyboardHandler.swift */,
+				923D4AE327E667A900652916 /* IntroView.swift */,
+			);
+			path = "parkingApp-Thesis";
+			sourceTree = "<group>";
+		};
+		925C8BFF27DAA24C00ED2403 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				925C8C0027DAA24C00ED2403 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		925C8C0727DAA2D400ED2403 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				925C8C0827DAA2D400ED2403 /* DetailsView.swift */,
+				925C8C0927DAA2D400ED2403 /* DetailsRepository.swift */,
+				925C8C0A27DAA2D400ED2403 /* DetailsViewModel.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		92641F4127DD484B00AE971A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92747E2627E614030013D823 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				92747E2727E6141E0013D823 /* LoadingIndicator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9289972127DE16BD0093B922 /* AddSpot */ = {
+			isa = PBXGroup;
+			children = (
+				9289972227DE16DB0093B922 /* AddSpotView.swift */,
+			);
+			path = AddSpot;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		925C8BF527DAA24A00ED2403 /* parkingApp-Thesis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 925C8C0427DAA24C00ED2403 /* Build configuration list for PBXNativeTarget "parkingApp-Thesis" */;
+			buildPhases = (
+				925C8BF227DAA24A00ED2403 /* Sources */,
+				925C8BF327DAA24A00ED2403 /* Frameworks */,
+				925C8BF427DAA24A00ED2403 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "parkingApp-Thesis";
+			packageProductDependencies = (
+				925C8C1727DAA68A00ED2403 /* FirebaseFirestore */,
+				92641F4227DD484B00AE971A /* FirebaseStorage */,
+				92641F4427DD484B00AE971A /* FirebaseStorageCombine-Community */,
+			);
+			productName = "parkingApp-Thesis";
+			productReference = 925C8BF627DAA24A00ED2403 /* parkingApp-Thesis.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		925C8BEE27DAA24A00ED2403 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					925C8BF527DAA24A00ED2403 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 925C8BF127DAA24A00ED2403 /* Build configuration list for PBXProject "parkingApp-Thesis" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 925C8BED27DAA24A00ED2403;
+			packageReferences = (
+				925C8C1627DAA68A00ED2403 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 925C8BF727DAA24A00ED2403 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				925C8BF527DAA24A00ED2403 /* parkingApp-Thesis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		925C8BF427DAA24A00ED2403 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				925C8C0127DAA24C00ED2403 /* Preview Assets.xcassets in Resources */,
+				925C8BFE27DAA24C00ED2403 /* Assets.xcassets in Resources */,
+				925C8C1527DAA51000ED2403 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		925C8BF227DAA24A00ED2403 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92747E2827E6141E0013D823 /* LoadingIndicator.swift in Sources */,
+				925C8C0C27DAA2D400ED2403 /* DetailsRepository.swift in Sources */,
+				925C8C1127DAA30200ED2403 /* MapView.swift in Sources */,
+				925C8C1327DAA30800ED2403 /* SplashScreen.swift in Sources */,
+				9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */,
+				923D4AE427E667A900652916 /* IntroView.swift in Sources */,
+				925C8BFC27DAA24A00ED2403 /* ContentView.swift in Sources */,
+				9215992727E3BE8A0055EE2F /* KeyboardHandler.swift in Sources */,
+				9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */,
+				925C8C0D27DAA2D400ED2403 /* DetailsViewModel.swift in Sources */,
+				925C8BFA27DAA24A00ED2403 /* parkingApp_ThesisApp.swift in Sources */,
+				925C8C0B27DAA2D400ED2403 /* DetailsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		925C8C0227DAA24C00ED2403 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		925C8C0327DAA24C00ED2403 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		925C8C0527DAA24C00ED2403 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"parkingApp-Thesis/Preview Content\"";
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "parkingApp-Thesis/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs your permision to use camera";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs your location on the map";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-Thesis";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		925C8C0627DAA24C00ED2403 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"parkingApp-Thesis/Preview Content\"";
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "parkingApp-Thesis/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs your permision to use camera";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs your location on the map";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-Thesis";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		925C8BF127DAA24A00ED2403 /* Build configuration list for PBXProject "parkingApp-Thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				925C8C0227DAA24C00ED2403 /* Debug */,
+				925C8C0327DAA24C00ED2403 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		925C8C0427DAA24C00ED2403 /* Build configuration list for PBXNativeTarget "parkingApp-Thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				925C8C0527DAA24C00ED2403 /* Debug */,
+				925C8C0627DAA24C00ED2403 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		925C8C1627DAA68A00ED2403 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		925C8C1727DAA68A00ED2403 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 925C8C1627DAA68A00ED2403 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		92641F4227DD484B00AE971A /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 925C8C1627DAA68A00ED2403 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		92641F4427DD484B00AE971A /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 925C8C1627DAA68A00ED2403 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 925C8BEE27DAA24A00ED2403 /* Project object */;
+}
