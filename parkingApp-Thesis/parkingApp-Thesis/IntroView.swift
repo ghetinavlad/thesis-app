@@ -54,6 +54,7 @@ struct IntroView: View {
             Button(action:
                     {
                 UserDefaults.standard.set(true, forKey: "hasLoggedIn")
+                UserDefaults.standard.set(username, forKey: "username")
                 isActive = true
             }
                    , label: {

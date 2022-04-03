@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import MapKit
 import FirebaseFirestore
+import FirebaseStorage
 
 struct MyAnnotationItem: Identifiable {
     var coordinate: CLLocationCoordinate2D
@@ -22,23 +23,22 @@ struct MyAnnotationItem: Identifiable {
 }
 
 struct Spot: Identifiable {
-    var id: String = UUID().uuidString
-    var latitude: Double
-    var longitude: Double
-    var occupation_rate: Int
-    var posted_at: String
+    var id: String
+    var coordinate: CLLocationCoordinate2D
+    var occupationRate: Int
+    var postedAt: String
     var reporter: String
     var zone: String
 }
 
 struct MapView: View {
-    @StateObject private var viewModel = MapViewModel()
+    @ObservedObject private var viewModel = MapViewModel()
     @State var center = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045))
     @State var radius: CGFloat = 0.5
     @State var lat: Double = 0.2
     @State var long: Double = 0.2
     @State var isHiddenPreview: Bool = true
-    @State var selectedPin: Int = 0
+    @State var selectedPin: String = ""
     @State var showDetails: Bool = false
     @State var showUploadImage: Bool = false
     @State var tracking: MapUserTrackingMode = .follow
@@ -56,8 +56,12 @@ struct MapView: View {
     
     var body: some View {
         ZStack{
+            if viewModel.isLoading {
+                LoadingIndicator()
+                    .zIndex(10)
+            }
             ZStack(alignment: .topTrailing){
-                Map(coordinateRegion: $center, showsUserLocation: true, userTrackingMode: $tracking, annotationItems: viewModel.locations , annotationContent:  {
+                Map(coordinateRegion: $center, showsUserLocation: true, userTrackingMode: $tracking, annotationItems: viewModel.spots , annotationContent:  {
                     location in MapAnnotation(coordinate: location.coordinate) {
                         ZStack{
                             VStack{
@@ -102,13 +106,7 @@ struct MapView: View {
                                     showDetails = false }
                                 
                             }, content: {
-                                DetailsXView(isSheetPresented: $showDetails, details: location)
-                            })
-                            .sheet(isPresented: $showUploadImage, onDismiss: {
-                                showUploadImage = false
-                            }, content: {
-                                AddSpotView(viewModel: viewModel)
-                                
+                                DetailsXView(isSheetPresented: $showDetails, viewModel: viewModel, details: location)
                             })
                             .frame(width: 100, height: 130)
                             .background(Color.white)
@@ -127,7 +125,7 @@ struct MapView: View {
                                 .frame(width: 34, height: 34)
                                 .foregroundColor(Color.blue)
                                 .onTapGesture {
-                                    print(location)
+                            
                                     selectedPin = location.id
                                     if timeRemaining == -1 {
                                         showDetails = true
@@ -197,9 +195,17 @@ struct MapView: View {
                 .padding(.top, 75)
                 
             }
+            .sheet(isPresented: $showUploadImage, onDismiss: {
+                showUploadImage = false
+            }, content: {
+                AddSpotView(viewModel: viewModel)
+                
+            })
+            
             ZStack {
                 Button(action: {
                     self.showUploadImage = true
+                    print("OK")
                 }, label: {
                     Image("plus")
                         .resizable()
@@ -213,14 +219,19 @@ struct MapView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             Spacer()
         }
+        .opacity(viewModel.isLoading ? 0.4 : 1)
         .onAppear {
-            //self.viewModel.fetchSpots()
+            self.viewModel.fetchSpots()
+
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
         
         
         
+    }
+    init() {
+        viewModel.fetchSpots()
     }
 }
 
@@ -251,7 +262,8 @@ func getCurrentTime() -> String {
 
 struct DetailsXView: View {
     @Binding var isSheetPresented: Bool
-    let details: MyAnnotationItem
+    @StateObject var viewModel: MapViewModel
+    let details: Spot
     
     var body: some View {
         VStack(spacing: 30){
@@ -314,7 +326,10 @@ struct DetailsXView: View {
             }
                             
             Button(action: {
-                
+                viewModel.deleteParkingSpot(id: details.id)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isSheetPresented = false
+                }
             }, label: {
                 HStack(spacing: 10){
                     Text("Reserve")
@@ -354,13 +369,15 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     var locationManager: CLLocationManager?
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     @Published var spots = [Spot]()
+    @Published var isLoading = false
     
-    @Published var locations: [MyAnnotationItem] = [
+    /*@Published var locations: [MyAnnotationItem] = [
         MyAnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), id: 0, type: "small" , occupationRate: 4, reporter: "Vlad G", time: 16, reporterRating: 4),
         MyAnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 46.56667, longitude: 23.78333), id: 1, type: "large" , occupationRate: 2, reporter: "Vlad G", time: 16, reporterRating: 4),
         MyAnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 47.790001, longitude: 22.889999), id: 2, type: "medium" , occupationRate: 3, reporter: "Vlad G", time: 16, reporterRating: 4)
-    ]
+    ]*/
     private var db = Firestore.firestore()
+    let storage = Storage.storage()
     
     func isLocationServiceEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -374,29 +391,74 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     func fetchSpots() {
+        self.isLoading = true
         db.collection("spots").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
+            
+            DispatchQueue.main.async {
+                
             self.spots = documents.map{ (QueryDocumentSnapshot) -> Spot in
                 let data = QueryDocumentSnapshot.data()
                 
-                let latitude = data["latitude"] as? Double ?? 0.0
-                let longitude = data["longitude"] as? Double ?? 0.0
-                let occupation_rate = data["occupation_rate"] as? Int ?? 0
-                let posted_at = data["posted_at"] as? String ?? ""
+                let id = data["id"] as? String ?? ""
+                let latitude = data["latitude"] as? CLLocationDegrees ?? 0.0
+                let longitude = data["longitude"] as? CLLocationDegrees ?? 0.0
+                let occupationRate = data["occupationRate"] as? Int ?? 0
+                let postedAt = data["postedAt"] as? String ?? ""
                 let reporter = data["reporter"] as? String ?? ""
                 let zone = data["zone"] as? String ?? ""
+                let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
-                return Spot(latitude: latitude, longitude: longitude, occupation_rate: occupation_rate, posted_at: posted_at, reporter: reporter, zone: zone)
+                return Spot(id: id, coordinate: coordinate, occupationRate: occupationRate, postedAt: postedAt, reporter: reporter, zone: zone)
+            }
+                self.isLoading = false
+            }
+        }
+        
+        
+        
+    }
+    
+    func addParkingSpot(occupationRate: Int, zone: String, image: UIImage?) {
+        var id = randomString()
+        if let coordinates = locationManager?.location!.coordinate {
+        db.collection("spots").addDocument(data: [
+                "id": id,
+                "occupationRate": occupationRate,
+                "latitude":  Double(round(1000*coordinates.latitude)/1000),
+                "longitude": Double(round(1000*coordinates.longitude)/1000),
+                "postedAt": getCurrentTime(),
+                "reporter": UserDefaults.standard.object(forKey: "username")!,
+                "zone": zone
+                
+            ])
+            if let image = image {
+                storage.reference().child(id).putData(image.jpegData(compressionQuality: 0.35)!, metadata: nil) { (_, err) in
+                if err != nil {
+                    print((err?.localizedDescription)!)
+                    return
+                }
+                print("success")
+            }
             }
         }
     }
     
-    func addParkingSpot() {
-        let nextId = locations.count
-        locations.append(MyAnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 46.771251, longitude: 23.625991), id: 3, type: "medium" , occupationRate: 3, reporter: "Vlad G", time: 16, reporterRating: 4))
+    func deleteParkingSpot(id: String) {
+        db.collection("spots").whereField("id", isEqualTo: id).getDocuments{(snap, err) in
+            if err != nil {
+                print("Error")
+                return
+            }
+            for doc in snap!.documents {
+                DispatchQueue.main.async {
+                    doc.reference.delete()
+                }
+            }
+        }
     }
     
     func isLocationAuthorization() {
@@ -497,6 +559,11 @@ extension View {
     func customForm() -> some View {
         modifier(CustomForm())
     }
+}
+
+func randomString() -> String {
+  let letters = "0123456789abcdefg"
+  return String((0..<10).map{ _ in letters.randomElement()! })
 }
 
 extension Color {

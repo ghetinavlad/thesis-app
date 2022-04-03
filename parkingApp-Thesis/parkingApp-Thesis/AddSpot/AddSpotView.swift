@@ -19,8 +19,9 @@ struct AddSpotView: View {
     @State private var vehicleType = 0
     @State private var occupationRate = 0
     @State private var currentTabArea = "A"
-    @State private var currentTabVehicle = "small"
     @State private var currentTabTime = "5 mins"
+    @State private var zone = "2"
+    @State private var occupateRate = 2
     @State private var details = ""
     @StateObject private var keyboardHandler = KeyboardHandler()
     
@@ -157,6 +158,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabArea = "A"
+                                    self.zone = "1"
                                 }
                             Text("Area B")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -182,6 +184,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabArea = "B"
+                                    self.zone = "2"
                                 }
                             Text("Free")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -207,6 +210,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabArea = "C"
+                                    self.zone = "free"
                                 }
                         }
                         .padding(.top, 15)
@@ -215,94 +219,6 @@ struct AddSpotView: View {
                     Divider()
                         .padding(.horizontal, 30)
                     
-                    VStack(spacing: 5) {
-                        HStack {
-                            Image("pin")
-                            Text("Vehicle size")
-                                .fontWeight(.medium)
-                                .foregroundColor(Color.black)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .padding(.leading, 20)
-                        HStack {
-                            Image("small-car")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
-                                .background(
-                                    ZStack {
-                                        Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .foregroundColor(.white)
-                                            .blur(radius: 4)
-                                            .offset(x: self.currentTabVehicle == "small" ? 8 : -8, y: self.currentTabVehicle == "small" ? 8 : -8)
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .fill(
-                                                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                            )
-                                            .padding(2)
-                                            .blur(radius: 2)
-                                    }
-                                )
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
-                                .shadow(color: Color.white, radius: 20, x: -10, y: -10)
-                                .onTapGesture {
-                                    self.currentTabVehicle = "small"
-                                }
-                            Image("medium-car")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
-                                .background(
-                                    ZStack {
-                                        Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .foregroundColor(.white)
-                                            .blur(radius: 4)
-                                            .offset(x: self.currentTabVehicle == "medium" ? 8 : -8, y: self.currentTabVehicle == "medium" ? 8 : -8)
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .fill(
-                                                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                            )
-                                            .padding(2)
-                                            .blur(radius: 2)
-                                    }
-                                )
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
-                                .shadow(color: Color.white, radius: 20, x: -10, y: -10)
-                                .onTapGesture {
-                                    self.currentTabVehicle = "medium"
-                                }
-                            Image("large-car")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
-                                .background(
-                                    ZStack {
-                                        Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .foregroundColor(.white)
-                                            .blur(radius: 4)
-                                            .offset(x: self.currentTabVehicle == "large" ? 8 : -8, y: self.currentTabVehicle == "large" ? 8 : -8)
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .fill(
-                                                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                            )
-                                            .padding(2)
-                                            .blur(radius: 2)
-                                    }
-                                )
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
-                                .shadow(color: Color.white, radius: 20, x: -10, y: -10)
-                                .onTapGesture {
-                                    self.currentTabVehicle = "large"
-                                }
-                        }
-                        .padding(.top, 15)
-                    }
                     
                     Divider()
                         .padding(.horizontal, 30)
@@ -341,6 +257,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabTime = "5 mins"
+                                    self.occupationRate = 1
                                 }
                             Text("15 mins")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -366,6 +283,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabTime = "15 mins"
+                                    self.occupationRate = 2
                                 }
                             Text("> 30 mins")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -391,6 +309,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
                                     self.currentTabTime = "30 mins"
+                                    self.occupationRate = 3
                                 }
                         }
                         .padding(.top, 15)
@@ -426,14 +345,7 @@ struct AddSpotView: View {
                         .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                     
                     Button(action: {
-                        /*storage.reference().child("test").putData(image!.jpegData(compressionQuality: 0.35)!, metadata: nil) { (_, err) in
-                            if err != nil {
-                                print((err?.localizedDescription)!)
-                                return
-                            }
-                            print("success")
-                        }*/
-                        viewModel.addParkingSpot()
+                        viewModel.addParkingSpot(occupationRate: occupationRate, zone: zone, image: image ?? UIImage(named: "empty"))
                     }, label: {
                         HStack(spacing: 15){
                             Image("add")

@@ -11,6 +11,7 @@ import SwiftUI
 struct LoadingIndicator: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<LoadingIndicator>) -> UIActivityIndicatorView {
         let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = .black
         indicator.startAnimating()
         return indicator
     }
