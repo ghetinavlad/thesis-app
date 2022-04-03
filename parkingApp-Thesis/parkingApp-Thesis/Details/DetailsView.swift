@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailsView: View {
     let details: Spot
     
-    @ObservedObject var viewModel: DetailsViewModel
+    @StateObject var viewModel: DetailsViewModel
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(spacing: 14){
@@ -62,6 +62,7 @@ struct DetailsView: View {
             .padding(.vertical, 10)
             .onAppear{
                 viewModel.getAddressesFromCoordinates(latitude: details.coordinate.latitude, longitude: details.coordinate.longitude)
+
             }
         }
     }

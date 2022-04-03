@@ -17,7 +17,6 @@ class DetailsViewModel: ObservableObject {
     
     init(repository: DetailsRepository = DetailsRepositoryImpl()) {
         self.repository = repository
-        
     }
     
     func getAddressesFromCoordinates(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {

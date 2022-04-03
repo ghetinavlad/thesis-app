@@ -476,10 +476,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     print((error?.localizedDescription)!)
                     return
                 }
-                DispatchQueue.main.async {
                     print("Download success")
                     self.imageURL = "\(url!)"
-                }
+                
             }
         }
     
