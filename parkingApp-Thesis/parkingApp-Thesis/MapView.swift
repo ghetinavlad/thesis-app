@@ -11,6 +11,7 @@ import SwiftUI
 import MapKit
 import FirebaseFirestore
 import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct MyAnnotationItem: Identifiable {
     var coordinate: CLLocationCoordinate2D
@@ -32,7 +33,7 @@ struct Spot: Identifiable {
 }
 
 struct MapView: View {
-    @ObservedObject private var viewModel = MapViewModel()
+    @StateObject private var viewModel = MapViewModel()
     @State var center = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045))
     @State var radius: CGFloat = 0.5
     @State var lat: Double = 0.2
@@ -230,9 +231,6 @@ struct MapView: View {
         
         
     }
-    init() {
-        viewModel.fetchSpots()
-    }
 }
 
 struct ChartView: View {
@@ -262,7 +260,7 @@ func getCurrentTime() -> String {
 
 struct DetailsXView: View {
     @Binding var isSheetPresented: Bool
-    @StateObject var viewModel: MapViewModel
+    @ObservedObject var viewModel: MapViewModel
     let details: Spot
     
     var body: some View {
@@ -301,12 +299,17 @@ struct DetailsXView: View {
             
             VStack{
             VStack{
-                Image("preview-car-2")
+                if viewModel.imageURL.isEmpty {
+                    LoadingIndicator()
+                } else {
+                AnimatedImage(url: URL(string: viewModel.imageURL))
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
                     .cornerRadius(10)
                     .shadow(color: Color.darkShadow, radius: 3, x: 3, y: 3)
                     .shadow(color: Color.lightShadow, radius: 3, x: -3, y: -2)
+                }
+                    
                 HStack {
                 Text("8 mins ago")
                     .font(.system(size: 12))
@@ -350,6 +353,10 @@ struct DetailsXView: View {
             .padding(.top, 10)
             Spacer()
         }
+            .onAppear {
+                    viewModel.loadImageFromFirebase(id: details.id)
+                    }
+                                                                          
             .padding(.top, 35)
             .padding(.bottom, 60)
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 1.6)
@@ -369,6 +376,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     var locationManager: CLLocationManager?
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     @Published var spots = [Spot]()
+    @Published var imageURL = ""
     @Published var isLoading = false
     
     /*@Published var locations: [MyAnnotationItem] = [
@@ -460,6 +468,20 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             }
         }
     }
+    
+    func loadImageFromFirebase(id: String) {
+            let storage = Storage.storage().reference(withPath: id)
+            storage.downloadURL { (url, error) in
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    return
+                }
+                DispatchQueue.main.async {
+                    print("Download success")
+                    self.imageURL = "\(url!)"
+                }
+            }
+        }
     
     func isLocationAuthorization() {
         guard let locationManager = locationManager else { return }

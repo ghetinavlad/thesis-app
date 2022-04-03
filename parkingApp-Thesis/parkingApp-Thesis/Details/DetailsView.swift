@@ -61,10 +61,7 @@ struct DetailsView: View {
             }
             .padding(.vertical, 10)
             .onAppear{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    print(details.coordinate.latitude)
                 viewModel.getAddressesFromCoordinates(latitude: details.coordinate.latitude, longitude: details.coordinate.longitude)
-                }
             }
         }
     }

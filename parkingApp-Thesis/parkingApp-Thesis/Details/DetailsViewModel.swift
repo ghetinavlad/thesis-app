@@ -26,7 +26,6 @@ class DetailsViewModel: ObservableObject {
             switch result {
                 case .success(let address):
                     self.addressFromCoordinates = address
-                    print("VLAD")
                     self.isLoading = false
                     print(address)
                 case .failure(let error):
