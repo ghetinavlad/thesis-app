@@ -14,7 +14,7 @@ struct AddSpotView: View {
     
     @State var sourceType:UIImagePickerController.SourceType = .camera
     
-    @ObservedObject var viewModel: MapViewModel
+    @StateObject var viewModel: MapViewModel
     @State var image:UIImage?
     @State private var vehicleType = 0
     @State private var occupationRate = 0

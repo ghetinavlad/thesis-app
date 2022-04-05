@@ -436,8 +436,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         db.collection("spots").addDocument(data: [
                 "id": id,
                 "occupationRate": occupationRate,
-                "latitude":  Double(round(1000*coordinates.latitude)/1000),
-                "longitude": Double(round(1000*coordinates.longitude)/1000),
+                "latitude":  Double(round(10000*coordinates.latitude)/10000),
+                "longitude": Double(round(10000*coordinates.longitude)/10000),
                 "postedAt": getCurrentTime(),
                 "reporter": UserDefaults.standard.object(forKey: "username")!,
                 "zone": zone
