@@ -29,7 +29,7 @@ struct ReportView: View {
                     .resizable()
                     .frame(width: 86, height: 86)
                 Text("Please select one or more issues that you have encountered")
-                    .fontWeight(.semibold)
+                    .fontWeight(.regular)
                     .foregroundColor(Color.white)
                     .padding(.horizontal, 25)
                 

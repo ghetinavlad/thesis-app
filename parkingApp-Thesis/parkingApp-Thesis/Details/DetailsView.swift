@@ -29,9 +29,9 @@ struct DetailsView: View {
                         if viewModel.addressFromCoordinates == "" {
                             LoadingIndicator()
                         }else {
-                        Text(viewModel.addressFromCoordinates)
-                            .foregroundColor(Color.gray)
-                            .fixedSize(horizontal: false, vertical: true)
+                            Text(viewModel.addressFromCoordinates)
+                                .foregroundColor(Color.gray)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     else {
@@ -45,6 +45,18 @@ struct DetailsView: View {
                     Spacer()
                     Text(details.postedAt)
                         .foregroundColor(Color.gray)
+                }
+                if !details.note.isEmpty {
+                    Divider()
+                    HStack(alignment: .center) {
+                        Text("Note")
+                            .foregroundColor(Color.black)
+                        Spacer()
+                        Text(details.note)
+                            .foregroundColor(Color.gray)
+                            .lineLimit(3    )
+                            .frame(width: UIScreen.main.bounds.width / 2.1, alignment: .leading)
+                    }
                 }
                 
                 Group{
@@ -62,7 +74,7 @@ struct DetailsView: View {
             .padding(.vertical, 10)
             .onAppear{
                 viewModel.getAddressesFromCoordinates(latitude: details.coordinate.latitude, longitude: details.coordinate.longitude)
-
+                
             }
         }
     }

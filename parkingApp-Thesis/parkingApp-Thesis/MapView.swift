@@ -30,6 +30,8 @@ struct Spot: Identifiable {
     var postedAt: String
     var reporter: String
     var zone: String
+    var note: String
+    var nrOfReports: Int
 }
 
 struct MapView: View {
@@ -121,27 +123,34 @@ struct MapView: View {
                             .zIndex(2)
                             .isHidden(selectedPin == location.id ? isHiddenPreview : true)
                             
-                            Image("parking")
-                                .resizable()
-                                .frame(width: 34, height: 34)
-                                .foregroundColor(Color.blue)
-                                .onTapGesture {
-                                    
-                                    selectedPin = location.id
-                                    if timeRemaining == -1 {
-                                        showDetails = true
-                                    }
-                                }
-                                .onLongPressGesture {
-                                    withAnimation{
-                                        //print(location)
+                            ZStack(alignment: .topTrailing) {
+                                Image("parking")
+                                    .resizable()
+                                    .frame(width: 34, height: 34)
+                                    .foregroundColor(Color.blue)
+                                    .onTapGesture {
+                                        
                                         selectedPin = location.id
-                                        isHiddenPreview.toggle()
+                                        if timeRemaining == -1 {
+                                            showDetails = true
+                                        }
+                                    }
+                                    .onLongPressGesture {
+                                        withAnimation{
+                                            //print(location)
+                                            selectedPin = location.id
+                                            isHiddenPreview.toggle()
+                                            
+                                        }
                                         
                                     }
-                                    
+                                    .zIndex(1)
+                                if location.nrOfReports >= 2 {
+                                    Image("exclamation-mark")
+                                        .padding(.top, -5)
+                                        .zIndex(10)
                                 }
-                                .zIndex(1)
+                            }
                         }
                         
                     }
@@ -199,7 +208,7 @@ struct MapView: View {
             .sheet(isPresented: $showUploadImage, onDismiss: {
                 showUploadImage = false
             }, content: {
-                AddSpotView(viewModel: viewModel)
+                AddSpotView(showUploadImage: $showUploadImage, viewModel: viewModel)
                 
             })
             
@@ -259,7 +268,7 @@ func getCurrentTime() -> String {
 }
 
 func getTimeLeft(time: String) -> String{
-
+    
     let delimiter = ":"
     var token = time.components(separatedBy: delimiter)
     let initialTimeValue = (Int(token[0]) ?? 0)*60 + (Int(token[1]) ?? 0)
@@ -346,7 +355,7 @@ struct DetailsXView: View {
                         }, label: {
                             Image("attention")
                         })
-                        .padding(.top, -15)
+                        .padding(.top, -20)
                     }
                     .padding(.horizontal, 35)
                     .padding(.top, -20)
@@ -459,9 +468,11 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     let postedAt = data["postedAt"] as? String ?? ""
                     let reporter = data["reporter"] as? String ?? ""
                     let zone = data["zone"] as? String ?? ""
+                    let nrOfReports = data["nrOfReports"] as? Int ?? 0
+                    let note = data["note"] as? String ?? ""
                     let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
-                    return Spot(id: id, coordinate: coordinate, occupationRate: occupationRate, postedAt: postedAt, reporter: reporter, zone: zone)
+                    return Spot(id: id, coordinate: coordinate, occupationRate: occupationRate, postedAt: postedAt, reporter: reporter, zone: zone, note: note, nrOfReports: nrOfReports)
                 }
                 self.isLoading = false
             }
@@ -471,7 +482,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         
     }
     
-    func addParkingSpot(occupationRate: Int, zone: String, image: UIImage?) {
+    func addParkingSpot(occupationRate: Int, zone: String, note: String, image: UIImage?) {
         var id = randomString()
         if let coordinates = locationManager?.location!.coordinate {
             db.collection("spots").addDocument(data: [
@@ -481,8 +492,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 "longitude": coordinates.longitude,
                 "postedAt": getCurrentTime(),
                 "reporter": UserDefaults.standard.object(forKey: "username")!,
-                "zone": zone
-                
+                "zone": zone,
+                "note": note,
+                "nrOfReports": 0
             ])
             if let image = image {
                 storage.reference().child(id).putData(image.jpegData(compressionQuality: 0.35)!, metadata: nil) { (_, err) in

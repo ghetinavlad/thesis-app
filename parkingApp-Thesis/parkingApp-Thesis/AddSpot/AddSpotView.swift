@@ -11,6 +11,7 @@ import FirebaseStorage
 struct AddSpotView: View {
     @State var showActionSheet = false
     @State var showImagePicker = false
+    @Binding var showUploadImage: Bool
     
     @State var sourceType:UIImagePickerController.SourceType = .camera
     
@@ -22,7 +23,7 @@ struct AddSpotView: View {
     @State private var currentTabTime = "5 mins"
     @State private var zone = "2"
     @State private var occupateRate = 2
-    @State private var details = ""
+    @State private var note = ""
     @StateObject private var keyboardHandler = KeyboardHandler()
     
     let storage = Storage.storage()
@@ -219,10 +220,6 @@ struct AddSpotView: View {
                     Divider()
                         .padding(.horizontal, 30)
                     
-                    
-                    Divider()
-                        .padding(.horizontal, 30)
-                    
                     VStack(spacing: 5) {
                         HStack {
                             Image("pin")
@@ -318,12 +315,11 @@ struct AddSpotView: View {
                     Divider()
                         .padding(.horizontal, 30)
                     
-                    TextField("", text: $details)
-                        .placeholder(when: details.isEmpty) {
-                                Text("Leave a note here").foregroundColor(.gray)
-                        }
+                    MultilineTextField("Leave a note here", text: $note, onCommit: {
+                        print("Final text: \(note)")
+                    })
                         .foregroundColor(Color.black)
-                        .frame(width: UIScreen.main.bounds.width / 1.3, height: 150, alignment: .top)
+                        .frame(width: UIScreen.main.bounds.width / 1.3, height: 120, alignment: .top)
                         .padding()
                         .background(
                             ZStack {
@@ -345,7 +341,10 @@ struct AddSpotView: View {
                         .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                     
                     Button(action: {
-                        viewModel.addParkingSpot(occupationRate: occupationRate, zone: zone, image: image ?? UIImage(named: "empty"))
+                        viewModel.addParkingSpot(occupationRate: occupationRate, zone: zone, note: note, image: image ?? UIImage(named: "empty"))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            showUploadImage = false
+                        }
                     }, label: {
                         HStack(spacing: 15){
                             Image("add")
@@ -398,6 +397,6 @@ extension View {
 
 struct AddSpotView_Previews: PreviewProvider {
     static var previews: some View {
-        AddSpotView(viewModel: MapViewModel())
+        AddSpotView(showUploadImage: .constant(false), viewModel: MapViewModel())
     }
 }

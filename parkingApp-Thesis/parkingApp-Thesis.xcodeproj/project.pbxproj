@@ -31,6 +31,7 @@
 		92747E2827E6141E0013D823 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92747E2727E6141E0013D823 /* LoadingIndicator.swift */; };
 		9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972227DE16DB0093B922 /* AddSpotView.swift */; };
 		9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972427DE20FC0093B922 /* ImagePicker.swift */; };
+		92B81D9D28020489009642DE /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B81D9C28020489009642DE /* MultilineTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		92747E2727E6141E0013D823 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		9289972227DE16DB0093B922 /* AddSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotView.swift; sourceTree = "<group>"; };
 		9289972427DE20FC0093B922 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		92B81D9C28020489009642DE /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				92747E2727E6141E0013D823 /* LoadingIndicator.swift */,
 				9231673028019B2F00B13973 /* AlertView.swift */,
 				923167342801D29000B13973 /* CheckBoxView.swift */,
+				92B81D9C28020489009642DE /* MultilineTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				9215992727E3BE8A0055EE2F /* KeyboardHandler.swift in Sources */,
 				9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */,
 				925C8C0D27DAA2D400ED2403 /* DetailsViewModel.swift in Sources */,
+				92B81D9D28020489009642DE /* MultilineTextField.swift in Sources */,
 				925C8BFA27DAA24A00ED2403 /* parkingApp_ThesisApp.swift in Sources */,
 				925C8C0B27DAA2D400ED2403 /* DetailsView.swift in Sources */,
 			);
