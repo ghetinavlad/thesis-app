@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ReportView: View {
     @Binding var showDetails: Bool
+    @StateObject var viewModel: MapViewModel
+    let details: Spot
     var dismissAction: (() -> Void)
     @State private var isDuplicatedSpotSelected: Bool = false
-    @State private var isInappropiateImageSelected: Bool = false
+    @State private var isInappropiateContentSelected: Bool = false
     @State private var isSpotNoLongerAvailable: Bool = false
     @State private var isOtherSelected: Bool = false
+    @State private var showErrorMessage: Bool = false
     
     var body: some View {
         ZStack(alignment: .topTrailing){
@@ -22,7 +26,8 @@ struct ReportView: View {
             }, label: {
                 Image(systemName: "xmark")
                     .foregroundColor(Color.white)
-                    .padding()
+                    .padding(.top, 30)
+                    .padding(.trailing, 20)
             }).zIndex(10)
             VStack{
                 Image("report")
@@ -34,11 +39,11 @@ struct ReportView: View {
                     .padding(.horizontal, 25)
                 
                 Spacer()
-                    .frame(height: 50)
+                    .frame(height: 60)
                 
                 VStack(alignment: .leading) {
                     CheckBoxView(isOptionSelected: $isDuplicatedSpotSelected, option: "Duplicated spot")
-                    CheckBoxView(isOptionSelected: $isInappropiateImageSelected, option: "Inappropiate image")
+                    CheckBoxView(isOptionSelected: $isInappropiateContentSelected, option: "Inappropiate image")
                     CheckBoxView(isOptionSelected: $isSpotNoLongerAvailable, option: "Spot is no longer available")
                     CheckBoxView(isOptionSelected: $isOtherSelected, option: "Other")
                 }
@@ -48,24 +53,40 @@ struct ReportView: View {
                     .frame(height: 40)
                 
                 Button(action: {
-                    self.showDetails = false
-                    self.dismissAction()
+                    if isDuplicatedSpotSelected || isInappropiateContentSelected || isSpotNoLongerAvailable || isOtherSelected {
+                        viewModel.updateParkingspot(id: details.id, nrOfReports: details.nrOfReports)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.showDetails = false
+                            self.dismissAction()
+                        }
+                    }
+                    else {
+                        showErrorMessage = true
+                    }
                 }, label: {
                     Text("Report")
                         .foregroundColor(Color.black)
                 })
                 .buttonStyle(GrowingButton5())
                 
+                Text(showErrorMessage ? "Please select at least one option in order to report" : "")
+                    .font(.system(size: 13))
+                    .padding(.horizontal, 25)
+                    .foregroundColor(Color.red)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(height: 30)
+                
             }
-            .frame(width: UIScreen.main.bounds.width / 1.2, height: UIScreen.main.bounds.height / 1.8)
+            .frame(width: UIScreen.main.bounds.width / 1.2, height: UIScreen.main.bounds.height / 1.65)
             .background(Color(red: 29/255, green: 29/255, blue: 27/255)).opacity(0.9)
             .cornerRadius(8)
+            .padding(.top, 20)
         }
     }
 }
 
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportView(showDetails: .constant(false), dismissAction: {})
+        ReportView(showDetails: .constant(false), viewModel: MapViewModel(), details: Spot(id: "", coordinate: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0), occupationRate: 0, postedAt: "", reporter: "", zone: "", note: "", nrOfReports: 0), dismissAction: {})
     }
 }

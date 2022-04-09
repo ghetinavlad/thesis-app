@@ -31,7 +31,8 @@ struct DetailsView: View {
                         }else {
                             Text(viewModel.addressFromCoordinates)
                                 .foregroundColor(Color.gray)
-                                .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(3)
+                                .frame(width: UIScreen.main.bounds.width / 2, alignment: .trailing)
                         }
                     }
                     else {
@@ -54,8 +55,8 @@ struct DetailsView: View {
                         Spacer()
                         Text(details.note)
                             .foregroundColor(Color.gray)
-                            .lineLimit(3    )
-                            .frame(width: UIScreen.main.bounds.width / 2.1, alignment: .leading)
+                            .lineLimit(3)
+                            .frame(width: UIScreen.main.bounds.width / 2, alignment: .trailing)
                     }
                 }
                 

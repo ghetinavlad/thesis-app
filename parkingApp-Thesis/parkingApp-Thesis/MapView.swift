@@ -414,7 +414,7 @@ struct DetailsXView: View {
         }
         .interactiveDismissDisabled(showReporting)
         .alertLink(isPresented: $showReporting, destination: {
-            ReportView(showDetails: $isSheetPresented, dismissAction: {self.showReporting = false})
+            ReportView(showDetails: $isSheetPresented, viewModel: viewModel, details: details, dismissAction: {self.showReporting = false})
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 248 / 255, green: 245 / 255, blue: 237 / 255).edgesIgnoringSafeArea(.all))
@@ -520,6 +520,25 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 }
             }
         }
+    }
+    
+    func updateParkingspot(id: String, nrOfReports: Int) {
+        db.collection("spots").whereField("id", isEqualTo: id).getDocuments{(snap, err) in
+            if err != nil {
+                print("Error")
+                return
+            }
+            for doc in snap!.documents {
+                DispatchQueue.main.async {
+                    doc.reference.updateData(
+                        [
+                            "nrOfReports": nrOfReports + 1
+                        ]
+                    )
+                }
+            }
+        }
+
     }
     
     func loadImageFromFirebase(id: String) {
