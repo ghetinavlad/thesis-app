@@ -258,8 +258,31 @@ func getCurrentTime() -> String {
     return romanianTime
 }
 
+func getTimeLeft(time: String) -> String{
+
+    let delimiter = ":"
+    var token = time.components(separatedBy: delimiter)
+    let initialTimeValue = (Int(token[0]) ?? 0)*60 + (Int(token[1]) ?? 0)
+    token = getCurrentTime().components(separatedBy: delimiter)
+    let currentTimeValue = (Int(token[0]) ?? 0)*60 + (Int(token[1]) ?? 0)
+    var timeElapsed = currentTimeValue - initialTimeValue
+    
+    if timeElapsed < 0 {
+        timeElapsed *= -1
+    }
+    
+    if timeElapsed == 0 {
+        return "just now"
+    } else if timeElapsed < 60 {
+        return "\(timeElapsed) mins ago"
+    } else {
+        return "\(timeElapsed / 60) hours ago"
+    }
+}
+
 struct DetailsXView: View {
     @Binding var isSheetPresented: Bool
+    @State var showReporting: Bool = false
     @ObservedObject var viewModel: MapViewModel
     let details: Spot
     @State private var locationIsCloseEnough: Bool = true
@@ -312,14 +335,14 @@ struct DetailsXView: View {
                     }
                     
                     HStack {
-                        Text("8 mins ago")
+                        Text(getTimeLeft(time: details.postedAt))
                             .font(.system(size: 12))
                             .foregroundColor(Color.black)
                             .fontWeight(.medium)
                             .padding(.leading, 5)
                         Spacer()
                         Button(action: {
-                            
+                            self.showReporting = true
                         }, label: {
                             Image("attention")
                         })
@@ -380,6 +403,10 @@ struct DetailsXView: View {
             .shadow(color: Color.lightShadow, radius: 3, x: 2, y: 2)
             .shadow(color: Color.darkShadow, radius: 3, x: -2, y: -2)
         }
+        .interactiveDismissDisabled(showReporting)
+        .alertLink(isPresented: $showReporting, destination: {
+            ReportView(showDetails: $isSheetPresented, dismissAction: {self.showReporting = false})
+        })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 248 / 255, green: 245 / 255, blue: 237 / 255).edgesIgnoringSafeArea(.all))
     }
@@ -553,6 +580,21 @@ struct GrowingButton3: ButtonStyle {
             .cornerRadius(25)
             .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
             .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+struct GrowingButton5: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        //.frame(width: 30, height: 30)
+            .foregroundColor(.neumorphictextColor)
+            .padding(10)
+            .padding(.horizontal, 10)
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(color: Color.darkShadow, radius: 2, x: 1, y: 1)
+            .shadow(color: Color.darkShadow, radius: 2, x: -1, y: -1)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
     }
