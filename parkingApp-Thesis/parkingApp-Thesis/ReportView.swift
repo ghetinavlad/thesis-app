@@ -25,10 +25,13 @@ struct ReportView: View {
                 self.dismissAction()
             }, label: {
                 Image(systemName: "xmark")
+                    .frame(width: 32, height: 32)
                     .foregroundColor(Color.white)
-                    .padding(.top, 30)
+                    .padding(.top, 40)
                     .padding(.trailing, 20)
-            }).zIndex(10)
+                
+            })
+            .zIndex(10)
             VStack{
                 Image("report")
                     .resizable()
@@ -43,7 +46,7 @@ struct ReportView: View {
                 
                 VStack(alignment: .leading) {
                     CheckBoxView(isOptionSelected: $isDuplicatedSpotSelected, option: "Duplicated spot")
-                    CheckBoxView(isOptionSelected: $isInappropiateContentSelected, option: "Inappropiate image")
+                    CheckBoxView(isOptionSelected: $isInappropiateContentSelected, option: "Inappropiate content")
                     CheckBoxView(isOptionSelected: $isSpotNoLongerAvailable, option: "Spot is no longer available")
                     CheckBoxView(isOptionSelected: $isOtherSelected, option: "Other")
                 }

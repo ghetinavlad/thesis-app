@@ -31,6 +31,8 @@
 		92747E2827E6141E0013D823 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92747E2727E6141E0013D823 /* LoadingIndicator.swift */; };
 		9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972227DE16DB0093B922 /* AddSpotView.swift */; };
 		9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972427DE20FC0093B922 /* ImagePicker.swift */; };
+		92ABF1702803558800789E7F /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABF16F2803558800789E7F /* ModalView.swift */; };
+		92ACBE3B28033E3B00480A7E /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ACBE3A28033E3B00480A7E /* CheckInternetConnection.swift */; };
 		92B81D9D28020489009642DE /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B81D9C28020489009642DE /* MultilineTextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		92747E2727E6141E0013D823 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		9289972227DE16DB0093B922 /* AddSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotView.swift; sourceTree = "<group>"; };
 		9289972427DE20FC0093B922 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		92ABF16F2803558800789E7F /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		92ACBE3A28033E3B00480A7E /* CheckInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
 		92B81D9C28020489009642DE /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +116,7 @@
 				9274572D27F9F1D200F098DB /* ImageView.swift */,
 				9274573227FA1B7700F098DB /* DetailsXViewModel.swift */,
 				9231673228019FEB00B13973 /* ReportView.swift */,
+				92ABF16F2803558800789E7F /* ModalView.swift */,
 			);
 			path = "parkingApp-Thesis";
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				9231673028019B2F00B13973 /* AlertView.swift */,
 				923167342801D29000B13973 /* CheckBoxView.swift */,
 				92B81D9C28020489009642DE /* MultilineTextField.swift */,
+				92ACBE3A28033E3B00480A7E /* CheckInternetConnection.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -251,9 +257,11 @@
 				9231673128019B2F00B13973 /* AlertView.swift in Sources */,
 				9274572E27F9F1D200F098DB /* ImageView.swift in Sources */,
 				9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */,
+				92ACBE3B28033E3B00480A7E /* CheckInternetConnection.swift in Sources */,
 				923D4AE427E667A900652916 /* IntroView.swift in Sources */,
 				925C8BFC27DAA24A00ED2403 /* ContentView.swift in Sources */,
 				9215992727E3BE8A0055EE2F /* KeyboardHandler.swift in Sources */,
+				92ABF1702803558800789E7F /* ModalView.swift in Sources */,
 				9289972327DE16DB0093B922 /* AddSpotView.swift in Sources */,
 				925C8C0D27DAA2D400ED2403 /* DetailsViewModel.swift in Sources */,
 				92B81D9D28020489009642DE /* MultilineTextField.swift in Sources */,

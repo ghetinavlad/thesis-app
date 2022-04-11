@@ -341,7 +341,7 @@ struct AddSpotView: View {
                         .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                     
                     Button(action: {
-                        viewModel.addParkingSpot(occupationRate: occupationRate, zone: zone, note: note, image: image ?? UIImage(named: "empty"))
+                        viewModel.addParkingSpot(occupationRate: occupationRate, zone: zone, note: note, image: image ?? UIImage(named: "no-image"))
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             showUploadImage = false
                         }

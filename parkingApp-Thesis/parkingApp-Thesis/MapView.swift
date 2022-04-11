@@ -59,7 +59,11 @@ struct MapView: View {
     
     var body: some View {
         ZStack{
-            if viewModel.isLoading {
+            if viewModel.showNoInternetConnection == true {
+                ModalView(showNoInternetConnection: $viewModel.showNoInternetConnection)
+                    .zIndex(10)
+                
+            } else if viewModel.isLoading {
                 LoadingIndicator()
                     .zIndex(10)
             }
@@ -205,6 +209,8 @@ struct MapView: View {
                 .padding(.top, 75)
                 
             }
+            .disabled(self.viewModel.showNoInternetConnection)
+            .blur(radius: self.viewModel.showNoInternetConnection ? 10 : 0, opaque: false)
             .sheet(isPresented: $showUploadImage, onDismiss: {
                 showUploadImage = false
             }, content: {
@@ -226,10 +232,11 @@ struct MapView: View {
                 .buttonStyle(GrowingButton3())
                 .padding(.bottom, 40)
             }
+            .disabled(self.viewModel.showNoInternetConnection)
+            .blur(radius: self.viewModel.showNoInternetConnection ? 10 : 0, opaque: false)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             Spacer()
         }
-        .opacity(viewModel.isLoading ? 0.4 : 1)
         .onAppear {
             self.viewModel.fetchSpots()
             
@@ -334,6 +341,7 @@ struct DetailsXView: View {
                 VStack{
                     if viewModel.imageURL.isEmpty {
                         LoadingIndicator()
+                            .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
                     } else {
                         AnimatedImage(url: URL(string: viewModel.imageURL))
                             .resizable()
@@ -428,6 +436,16 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var spots = [Spot]()
     @Published var imageURL = ""
     @Published var isLoading = false
+    @Published var showNoInternetConnection = false
+    let queue = DispatchQueue(label: "Monitor")
+    @ObservedObject var networkingViewModel = InternetConnectionObserver()
+    
+    override init() {
+        super.init()
+        setupObservers()
+        networkingViewModel.checkInternetConnection()
+        networkingViewModel.monitor.start(queue: queue)
+    }
     
     /*@Published var locations: [MyAnnotationItem] = [
      MyAnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), id: 0, type: "small" , occupationRate: 4, reporter: "Vlad G", time: 16, reporterRating: 4),
@@ -446,6 +464,19 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         } else {
             print("OFF")
         }
+    }
+    
+    private func setupObservers() {
+        _ = NotificationCenter.default.addObserver(forName: .noInternetConnection, object: nil, queue: nil, using: {
+            [weak self] data in guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let connectionStatus = data.object as? Bool {
+                    withAnimation {
+                        self.showNoInternetConnection = !connectionStatus
+                    }
+                }
+            }
+        })
     }
     
     func fetchSpots() {
@@ -529,16 +560,21 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 return
             }
             for doc in snap!.documents {
-                DispatchQueue.main.async {
-                    doc.reference.updateData(
-                        [
-                            "nrOfReports": nrOfReports + 1
-                        ]
-                    )
+                if nrOfReports + 1 >= 5 {
+                    DispatchQueue.main.async {
+                        doc.reference.delete()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        doc.reference.updateData(
+                            [
+                                "nrOfReports": nrOfReports + 1
+                            ]
+                        )
+                    }
                 }
             }
         }
-
     }
     
     func loadImageFromFirebase(id: String) {
@@ -607,6 +643,21 @@ struct GrowingButton3: ButtonStyle {
         //.frame(width: 30, height: 30)
             .foregroundColor(.neumorphictextColor)
             .padding(12)
+            .background(Color.white)
+            .cornerRadius(25)
+            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
+            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+struct GrowingButton6: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        //.frame(width: 30, height: 30)
+            .foregroundColor(.neumorphictextColor)
+            .padding(12)
+            .padding(.horizontal, 15)
             .background(Color.white)
             .cornerRadius(25)
             .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
@@ -729,6 +780,10 @@ struct RoundedCorner: Shape {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
     }
+}
+
+extension Notification.Name {
+    static let noInternetConnection = Notification.Name("myNotification")
 }
 
 

@@ -27,8 +27,7 @@ struct SplashScreen<Content: View, Title: View, Logo: View>: View {
     @State var imageAnimation = false
     @State var endAnimation = false
     @State var isActive = false
-    //var hasLoggedInBefore = UserDefaults.standard.bool(forKey: "hasLoggedIn")
-    var hasLoggedInBefore = false
+    var hasLoggedInBefore = UserDefaults.standard.bool(forKey: "hasLoggedIn")
     
     @Namespace var animation
     
