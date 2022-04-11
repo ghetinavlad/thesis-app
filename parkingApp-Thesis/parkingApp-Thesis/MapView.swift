@@ -239,7 +239,6 @@ struct MapView: View {
         }
         .onAppear {
             self.viewModel.fetchSpots()
-            
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
@@ -299,6 +298,7 @@ func getTimeLeft(time: String) -> String{
 struct DetailsXView: View {
     @Binding var isSheetPresented: Bool
     @State var showReporting: Bool = false
+    @State private var distance = 0.0
     @ObservedObject var viewModel: MapViewModel
     let details: Spot
     @State private var locationIsCloseEnough: Bool = true
@@ -369,44 +369,60 @@ struct DetailsXView: View {
                     .padding(.top, -20)
                 }
                 
-                Button(action: {
-                    viewModel.deleteParkingSpot(id: details.id)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        isSheetPresented = false
-                    }
-                }, label: {
-                    HStack(spacing: 10){
-                        if locationIsCloseEnough {
-                            Text("Reserve")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                                .fontWeight(.regular)
-                            
-                            Image("accept")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                        } else {
-                            Text("Unable to reserve")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                                .fontWeight(.regular)
-                            
-                            Image("error")
-                                .resizable()
-                                .frame(width: 24, height: 24)
+                HStack(spacing: 25) {
+                    Button(action: {
+                        viewModel.deleteParkingSpot(id: details.id)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            isSheetPresented = false
                         }
-                    }
-                    .padding(.leading, 45)
-                    .padding(.trailing, 45)
-                    .padding(.vertical, 14)
-                    .cornerRadius(10)
-                })
-                .buttonStyle(GrowingButton2())
+                    }, label: {
+                        HStack(spacing: 10){
+                            if locationIsCloseEnough {
+                                Text("Reserve")
+                                    .font(.system(size: 16.5))
+                                    .foregroundColor(Color.black)
+                                    .fontWeight(.regular)
+                                
+                                Image("accept")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                            } else {
+                                Text("Unable to reserve")
+                                    .font(.system(size: 16.5))
+                                    .foregroundColor(Color.black)
+                                    .fontWeight(.regular)
+                                
+                                Image("error")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                            }
+                        }
+                    })
+                    .buttonStyle(GrowingButton8())
+                    .disabled(!locationIsCloseEnough)
+                    
+                    Button(action: {
+                        viewModel.findNewLocation(toCoordinate: details.coordinate)
+                    }, label: {
+                        if viewModel.isLoadingDistance == true {
+                            LoadingIndicator()
+                        }
+                        else if viewModel.distance == 0.0 {
+                            Image("distance")
+                        } else {
+                            Text(String(format: "%.1f", viewModel.distance) + " km")
+                                .font(.system(size: 13))
+                        }
+                    })
+                    .buttonStyle(GrowingButton7())
+                    .disabled(!(viewModel.distance == 0.0))
+                }
                 .padding(.top, 10)
-                .disabled(!locationIsCloseEnough)
+                .frame(alignment: .center)
                 Spacer()
             }
             .onAppear {
+                viewModel.distance = 0.0
                 locationIsCloseEnough = viewModel.checkDistanceBetweenUserAndLocation(location: CLLocation(latitude: details.coordinate.latitude, longitude: details.coordinate.longitude))
                 viewModel.loadImageFromFirebase(id: details.id)
             }
@@ -437,6 +453,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var imageURL = ""
     @Published var isLoading = false
     @Published var showNoInternetConnection = false
+    @Published var distance = 0.0
+    @Published var isLoadingDistance = false
     let queue = DispatchQueue(label: "Monitor")
     @ObservedObject var networkingViewModel = InternetConnectionObserver()
     
@@ -621,6 +639,44 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         isLocationAuthorization()
     }
+    
+    func findNewLocation(toCoordinate: CLLocationCoordinate2D) {
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: (self.locationManager?.location!.coordinate)!, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: toCoordinate, addressDictionary: nil))
+        request.requestsAlternateRoutes = false
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        self.isLoadingDistance = true
+        self.computeDistance(request: directions) { result in
+            switch result {
+            case .success(let distance):
+                self.distance = distance / 1000
+                self.isLoadingDistance = false
+                print(distance)
+            case .failure(let error):
+                print("An error occurred: \(error)")
+                self.isLoadingDistance = false
+            }
+        }
+    }
+    
+    func computeDistance(request: MKDirections, completion: @escaping ((Result<Double, Error>) -> Void)) {
+        let directions = request
+        directions.calculate { response, error in
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            if let distance = response!.routes.first?.distance {
+                completion(.success(distance))
+            }
+            else {
+                self.computeDistance(request: request, completion: completion)
+            }
+        }
+    }
 }
 
 
@@ -715,6 +771,33 @@ struct GrowingButton4: ButtonStyle {
             .foregroundColor(.neumorphictextColor)
             .background(Color(red: 255 / 255, green: 168 / 255, blue: 54 / 255))
             .cornerRadius(10)
+            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
+            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+
+struct GrowingButton7: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 90, height: 45)
+            .foregroundColor(.neumorphictextColor)
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
+            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+struct GrowingButton8: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 200, height: 45)
+            .foregroundColor(.neumorphictextColor)
+            .background(Color(red: 233/255, green: 244/255, blue: 252/255))
+            .cornerRadius(8)
             .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
             .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
