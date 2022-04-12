@@ -304,7 +304,7 @@ struct DetailsXView: View {
     @State private var locationIsCloseEnough: Bool = true
     
     var body: some View {
-        VStack(spacing: 30){
+        VStack(spacing: 20){
             VStack {
                 HStack{
                     Spacer()
@@ -407,17 +407,23 @@ struct DetailsXView: View {
                         if viewModel.isLoadingDistance == true {
                             LoadingIndicator()
                         }
-                        else if viewModel.distance == 0.0 {
+                        else if viewModel.distance == 0 {
                             Image("distance")
                         } else {
-                            Text(String(format: "%.1f", viewModel.distance) + " km")
+                            if viewModel.distance > 1000 {
+                            Text(String(format: "%.1f", viewModel.distance/1000) + " km")
                                 .font(.system(size: 13))
+                            }
+                            else {
+                                Text(String(viewModel.distance) + " m")
+                                    .font(.system(size: 13))
+                            }
                         }
                     })
                     .buttonStyle(GrowingButton7())
                     .disabled(!(viewModel.distance == 0.0))
                 }
-                .padding(.top, 10)
+                .padding(.top, 20)
                 .frame(alignment: .center)
                 Spacer()
             }
@@ -427,7 +433,7 @@ struct DetailsXView: View {
                 viewModel.loadImageFromFirebase(id: details.id)
             }
             
-            .padding(.top, 35)
+            .padding(.top, 25)
             .padding(.bottom, 60)
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 1.6)
             
@@ -652,7 +658,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         self.computeDistance(request: directions) { result in
             switch result {
             case .success(let distance):
-                self.distance = distance / 1000
+                self.distance = distance
                 self.isLoadingDistance = false
                 print(distance)
             case .failure(let error):
