@@ -45,7 +45,6 @@ struct MapView: View {
     @State var showDetails: Bool = false
     @State var showUploadImage: Bool = false
     @State var tracking: MapUserTrackingMode = .follow
-    @State var timeRemaining = -1
     @State var toTime: CGFloat = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -109,7 +108,6 @@ struct MapView: View {
                             }
                             .sheet(isPresented: selectedPin == location.id ? $showDetails : .constant(false), onDismiss: {
                                 if selectedPin == location.id {
-                                    timeRemaining = 20
                                     showDetails = false }
                                 
                             }, content: {
@@ -135,9 +133,8 @@ struct MapView: View {
                                     .onTapGesture {
                                         
                                         selectedPin = location.id
-                                        if timeRemaining == -1 {
-                                            showDetails = true
-                                        }
+                                        showDetails = true
+                                        
                                     }
                                     .onLongPressGesture {
                                         withAnimation{
@@ -182,27 +179,6 @@ struct MapView: View {
                             .frame(width: 30, height: 30)
                     })
                     .buttonStyle(GrowingButton())
-                    if self.timeRemaining != -1 {
-                        ZStack {
-                            Circle()
-                                .trim(from: 0, to: 1)
-                                .stroke(Color.red, style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                                .frame(width: 30, height: 30)
-                            Circle()
-                                .trim(from: 0, to: self.toTime)
-                                .stroke(Color.white, style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                                .frame(width: 30, height: 30)
-                            Text("\(timeRemaining)")
-                                .onReceive(timer) { _ in
-                                    if timeRemaining > -1 {
-                                        timeRemaining -= 1
-                                        withAnimation(.default) {
-                                            self.toTime = CGFloat(self.timeRemaining) / 20
-                                        }
-                                    }
-                                }
-                        }
-                    }
                     
                 }
                 .padding(.trailing, 35)
@@ -411,8 +387,8 @@ struct DetailsXView: View {
                             Image("distance")
                         } else {
                             if viewModel.distance > 1000 {
-                            Text(String(format: "%.1f", viewModel.distance/1000) + " km")
-                                .font(.system(size: 13))
+                                Text(String(format: "%.1f", viewModel.distance/1000) + " km")
+                                    .font(.system(size: 13))
                             }
                             else {
                                 Text(String(viewModel.distance) + " m")
