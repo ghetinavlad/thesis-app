@@ -41,11 +41,11 @@ struct SplashScreen<Content: View, Title: View, Logo: View>: View {
             }
             titleView
                 .offset(y: textAnimation ? 0 : 110)
-            NavigationLink(destination: self.hasLoggedInBefore ? AnyView(MapView()) : AnyView(IntroView()), isActive: $isActive, label: {EmptyView() })
+            NavigationLink(destination: self.hasLoggedInBefore ? AnyView(LoginView()) : AnyView(IntroView()), isActive: $isActive, label: {EmptyView() })
         }
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 248 / 255, green: 245 / 255, blue: 237 / 255).ignoresSafeArea())
+        .background(Color.white.ignoresSafeArea())
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(.spring()) {

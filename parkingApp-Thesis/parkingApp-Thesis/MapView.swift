@@ -47,8 +47,7 @@ struct MapView: View {
     @State var tracking: MapUserTrackingMode = .follow
     @State var toTime: CGFloat = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
-    
+    private let userType = UserDefaults.standard.bool(forKey: "isUser")
     
     @State private var didTap: Bool = false
     
@@ -131,9 +130,10 @@ struct MapView: View {
                                     .frame(width: 34, height: 34)
                                     .foregroundColor(Color.blue)
                                     .onTapGesture {
-                                        
-                                        selectedPin = location.id
-                                        showDetails = true
+                                        if userType == true  {
+                                            selectedPin = location.id
+                                            showDetails = true
+                                        }
                                         
                                     }
                                     .onLongPressGesture {
@@ -194,24 +194,27 @@ struct MapView: View {
                 
             })
             
-            ZStack {
-                Button(action: {
-                    self.showUploadImage = true
-                    print("OK")
-                }, label: {
-                    Image("plus")
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(Color.red)
-                        .frame(width: 22, height: 22)
-                })
-                .buttonStyle(GrowingButton3())
-                .padding(.bottom, 40)
+            if userType == true {
+                ZStack {
+                    Button(action: {
+                        self.showUploadImage = true
+                        print("OK")
+                    }, label: {
+                        Image("plus")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(Color.red)
+                            .frame(width: 22, height: 22)
+                    })
+                    .buttonStyle(GrowingButton3())
+                    .padding(.bottom, 40)
+                }
+                .disabled(self.viewModel.showNoInternetConnection)
+                .blur(radius: self.viewModel.showNoInternetConnection ? 10 : 0, opaque: false)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            .disabled(self.viewModel.showNoInternetConnection)
-            .blur(radius: self.viewModel.showNoInternetConnection ? 10 : 0, opaque: false)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             Spacer()
+            
         }
         .onAppear {
             self.viewModel.fetchSpots()
@@ -391,7 +394,7 @@ struct DetailsXView: View {
                                     .font(.system(size: 13))
                             }
                             else {
-                                Text(String(viewModel.distance) + " m")
+                                Text(String(format: "%.0f", viewModel.distance) + " m")
                                     .font(.system(size: 13))
                             }
                         }
@@ -770,6 +773,19 @@ struct GrowingButton7: ButtonStyle {
             .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
             .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+struct GrowingButton9: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.neumorphictextColor)
+            .frame(width: UIScreen.main.bounds.width / 1.5, height: 46)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
+            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.1 : 1)
             .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
     }
 }
