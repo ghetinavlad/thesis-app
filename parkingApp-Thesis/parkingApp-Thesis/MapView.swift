@@ -136,6 +136,7 @@ struct MapView: View {
                                         }
                                         
                                     }
+                                /*
                                     .onLongPressGesture {
                                         withAnimation{
                                             //print(location)
@@ -146,6 +147,7 @@ struct MapView: View {
                                         
                                     }
                                     .zIndex(1)
+                                 */
                                 if location.nrOfReports >= 2 {
                                     Image("exclamation-mark")
                                         .padding(.top, -5)
@@ -340,12 +342,21 @@ struct DetailsXView: View {
                         Button(action: {
                             self.showReporting = true
                         }, label: {
-                            Image("attention")
+                            if viewModel.isReportLoading {
+                                LoadingIndicator()
+                            }
+                            else if !viewModel.hasAlreadyReported {
+                                Image("attention")
+                            }
+                            else {
+                                EmptyView()
+                                    .frame(width: 64, height: 64)
+                            }
                         })
                         .padding(.top, -20)
                     }
                     .padding(.horizontal, 35)
-                    .padding(.top, -20)
+                    .padding(.top, viewModel.hasAlreadyReported ? 0 : -20)
                 }
                 
                 HStack(spacing: 25) {
@@ -410,6 +421,7 @@ struct DetailsXView: View {
                 viewModel.distance = 0.0
                 locationIsCloseEnough = viewModel.checkDistanceBetweenUserAndLocation(location: CLLocation(latitude: details.coordinate.latitude, longitude: details.coordinate.longitude))
                 viewModel.loadImageFromFirebase(id: details.id)
+                viewModel.checkIfUserHasReportedBefore(id: details.id)
             }
             
             .padding(.top, 25)
@@ -439,6 +451,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var isLoading = false
     @Published var showNoInternetConnection = false
     @Published var distance = 0.0
+    @Published var isReportLoading = false
+    @Published var hasAlreadyReported = false
     @Published var isLoadingDistance = false
     let queue = DispatchQueue(label: "Monitor")
     @ObservedObject var networkingViewModel = InternetConnectionObserver()
@@ -542,6 +556,22 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
+    func addReporterToList(id: String) {
+        let currentEmail = UserDefaults.standard.string(forKey: "email")
+        db.collection("spots").whereField("id", isEqualTo: id).getDocuments{(snap, err) in
+            if err != nil {
+                print("Error")
+                return
+            }
+            for doc in snap!.documents {
+                self.db.collection("spots").document(doc.documentID).collection("reporters").addDocument(data: [
+                    "email": currentEmail
+                ])
+                }
+            }
+            self.isReportLoading = false
+        }
+    
     func deleteParkingSpot(id: String) {
         db.collection("spots").whereField("id", isEqualTo: id).getDocuments{(snap, err) in
             if err != nil {
@@ -553,6 +583,35 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     doc.reference.delete()
                 }
             }
+        }
+    }
+    
+    func checkIfUserHasReportedBefore(id: String) {
+        self.isReportLoading = true
+        self.hasAlreadyReported = false
+        db.collection("spots").whereField("id", isEqualTo: id).getDocuments{(snap, err) in
+            if err != nil {
+                print("Error")
+                return
+            }
+            for doc in snap!.documents {
+                self.db.collection("spots").document(doc.documentID).collection("reporters").getDocuments{(snapshot, err) in
+                    if err != nil {
+                        print("Error")
+                        return
+                    }
+                    for doc in snapshot!.documents {
+                        let data = doc.data()
+                        let email = data["email"] as? String ?? ""
+                        let currentEmail = UserDefaults.standard.string(forKey: "email")
+                        if email == currentEmail {
+                            self.hasAlreadyReported = true
+                        }
+                        
+                    }
+                }
+            }
+            self.isReportLoading = false
         }
     }
     

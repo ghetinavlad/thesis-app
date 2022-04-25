@@ -58,6 +58,7 @@ struct ReportView: View {
                 Button(action: {
                     if isDuplicatedSpotSelected || isInappropiateContentSelected || isSpotNoLongerAvailable || isOtherSelected {
                         viewModel.updateParkingspot(id: details.id, nrOfReports: details.nrOfReports)
+                        viewModel.addReporterToList(id: details.id)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.showDetails = false
                             self.dismissAction()

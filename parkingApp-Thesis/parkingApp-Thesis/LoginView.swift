@@ -102,6 +102,7 @@ struct LoginView: View {
                 }
                 UserDefaults.standard.set(user.displayName, forKey: "username")
                 UserDefaults.standard.set(true, forKey: "isUser")
+                UserDefaults.standard.set(user.email, forKey: "email")
                 //print(user.email ?? "Success")
                 //print(user.displayName ?? "Success")
                 isActive = true
@@ -113,6 +114,7 @@ struct LoginView: View {
     func handleLoginGuest() {
         UserDefaults.standard.set("Guest", forKey: "username")
         UserDefaults.standard.set(false, forKey: "isUser")
+        UserDefaults.standard.set("guest@gmail.com", forKey: "email")
         isActive = true
     }
 }
