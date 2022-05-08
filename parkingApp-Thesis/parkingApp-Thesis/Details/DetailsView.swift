@@ -47,6 +47,14 @@ struct DetailsView: View {
                     Text(details.postedAt)
                         .foregroundColor(Color.gray)
                 }
+                Divider()
+                HStack(alignment: .center) {
+                    Text("Zone")
+                        .foregroundColor(Color.black)
+                    Spacer()
+                    Text(details.zone)
+                        .foregroundColor(Color.gray)
+                }
                 if !details.note.isEmpty {
                     Divider()
                     HStack(alignment: .center) {
@@ -70,6 +78,7 @@ struct DetailsView: View {
                         .foregroundColor(Color.red)
                         .fontWeight(.bold)
                 }
+                .padding(.top, 10)
                 .padding(.bottom, -12)
             }
             .padding(.vertical, 10)

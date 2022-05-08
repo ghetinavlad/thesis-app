@@ -19,7 +19,7 @@ struct AddSpotView: View {
     @State var image:UIImage?
     @State private var vehicleType = 0
     @State private var occupationRate = 0
-    @State private var currentTabArea = "A"
+    @State private var currentTabArea = "2"
     @State private var currentTabTime = "5 mins"
     @State private var zone = "2"
     @State private var occupateRate = 2
@@ -135,17 +135,17 @@ struct AddSpotView: View {
                         }
                         .padding(.leading, 20)
                         HStack {
-                            Text("Area A")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                            Text("Zone 1(A)")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .foregroundColor(.white)
                                             .blur(radius: 4)
-                                            .offset(x: self.currentTabArea == "A" ? 8 : -8, y: self.currentTabArea == "A" ? 8 : -8)
+                                            .offset(x: self.currentTabArea == "1" ? 8 : -8, y: self.currentTabArea == "1" ? 8 : -8)
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .fill(
                                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -158,20 +158,20 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabArea = "A"
-                                    self.zone = "1"
+                                    self.currentTabArea = "1"
+                                    self.zone = "1(A)"
                                 }
-                            Text("Area B")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                            Text("Zone 2(B)")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .foregroundColor(.white)
                                             .blur(radius: 4)
-                                            .offset(x: self.currentTabArea == "B" ? 8 : -8, y: self.currentTabArea == "B" ? 8 : -8)
+                                            .offset(x: self.currentTabArea == "2" ? 8 : -8, y: self.currentTabArea == "2" ? 8 : -8)
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .fill(
                                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -184,20 +184,20 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabArea = "B"
-                                    self.zone = "2"
+                                    self.currentTabArea = "2"
+                                    self.zone = "2(B)"
                                 }
                             Text("Free")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .foregroundColor(.white)
                                             .blur(radius: 4)
-                                            .offset(x: self.currentTabArea == "C" ? 8 : -8, y: self.currentTabArea == "C" ? 8 : -8)
+                                            .offset(x: self.currentTabArea == "free" ? 8 : -8, y: self.currentTabArea == "free" ? 8 : -8)
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .fill(
                                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -210,8 +210,63 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabArea = "C"
+                                    self.currentTabArea = "free"
                                     self.zone = "free"
+                                }
+                        }
+                        .padding(.top, 15)
+                        HStack {
+                            Text("Chargeable")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
+                                .foregroundColor(Color.black)
+                                .frame(width: 105, height: 42)
+                                .background(
+                                    ZStack {
+                                        Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .foregroundColor(.white)
+                                            .blur(radius: 4)
+                                            .offset(x: self.currentTabArea == "chargeable" ? 8 : -8, y: self.currentTabArea == "chargeable" ? 8 : -8)
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .fill(
+                                                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                            )
+                                            .padding(2)
+                                            .blur(radius: 2)
+                                    }
+                                )
+                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
+                                .shadow(color: Color.white, radius: 20, x: -10, y: -10)
+                                .onTapGesture {
+                                    self.currentTabArea = "chargeable"
+                                    self.zone = "chargeable"
+                                }
+                            Text("Other")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
+                                .foregroundColor(Color.black)
+                                .frame(width: 105, height: 42)
+                                .background(
+                                    ZStack {
+                                        Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .foregroundColor(.white)
+                                            .blur(radius: 4)
+                                            .offset(x: self.currentTabArea == "other" ? 8 : -8, y: self.currentTabArea == "other" ? 8 : -8)
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .fill(
+                                                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                            )
+                                            .padding(2)
+                                            .blur(radius: 2)
+                                    }
+                                )
+                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
+                                .shadow(color: Color.white, radius: 20, x: -10, y: -10)
+                                .onTapGesture {
+                                    self.currentTabArea = "other"
+                                    self.zone = "other"
                                 }
                         }
                         .padding(.top, 15)
@@ -223,17 +278,25 @@ struct AddSpotView: View {
                     VStack(spacing: 5) {
                         HStack {
                             Image("pin")
+                            VStack {
                             Text("Estimated time until occupied")
                                 .fontWeight(.medium)
                                 .foregroundColor(Color.black)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("*it might depend on the local time and area")
+                                .fontWeight(.medium)
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 11.5))
+                                .padding(.leading, 5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                         }
                         .padding(.leading, 20)
                         HStack {
-                            Text("< 5mins")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                            Text("< 5 mins")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
@@ -253,20 +316,20 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabTime = "5 mins"
+                                    self.currentTabTime = "< 5 mins"
                                     self.occupationRate = 1
                                 }
-                            Text("15 mins")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                            Text("15 - 30 mins")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .foregroundColor(.white)
                                             .blur(radius: 4)
-                                            .offset(x: self.currentTabTime == "15 mins" ? 8 : -8, y: self.currentTabTime == "15 mins" ? 8 : -8)
+                                            .offset(x: self.currentTabTime == "15 - 30 mins" ? 8 : -8, y: self.currentTabTime == "15 - 30 mins" ? 8 : -8)
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .fill(
                                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -279,20 +342,20 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabTime = "15 mins"
+                                    self.currentTabTime = "15 - 30 mins"
                                     self.occupationRate = 2
                                 }
-                            Text("> 30 mins")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                            Text("> 45 mins")
+                                .font(.system(size: 13.5, weight: .medium, design: .rounded))
                                 .foregroundColor(Color.black)
-                                .frame(width: 100, height: 42)
+                                .frame(width: 105, height: 42)
                                 .background(
                                     ZStack {
                                         Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .foregroundColor(.white)
                                             .blur(radius: 4)
-                                            .offset(x: self.currentTabTime == "30 mins" ? 8 : -8, y: self.currentTabTime == "30 mins" ? 8 : -8)
+                                            .offset(x: self.currentTabTime == "> 45 mins" ? 8 : -8, y: self.currentTabTime == "> 45 mins" ? 8 : -8)
                                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .fill(
                                                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8916720748, green: 0.945957005, blue: 0.9388917089, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -305,7 +368,7 @@ struct AddSpotView: View {
                                 .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 10, y: 10)
                                 .shadow(color: Color.white, radius: 20, x: -10, y: -10)
                                 .onTapGesture {
-                                    self.currentTabTime = "30 mins"
+                                    self.currentTabTime = "> 45 mins"
                                     self.occupationRate = 3
                                 }
                         }
@@ -358,7 +421,7 @@ struct AddSpotView: View {
                         .padding(.trailing, 30)
                         .padding(.vertical, 14)
                     })
-                    .buttonStyle(GrowingButton4())
+                    .buttonStyle(GrowingButton11())
                 }
                 .frame(width: UIScreen.main.bounds.width)
                 .padding(.top, 30)

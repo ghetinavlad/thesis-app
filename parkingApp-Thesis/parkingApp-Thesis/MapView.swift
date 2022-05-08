@@ -136,6 +136,7 @@ struct MapView: View {
                                         }
                                         
                                     }
+                                    
                                 /*
                                     .onLongPressGesture {
                                         withAnimation{
@@ -144,7 +145,6 @@ struct MapView: View {
                                             isHiddenPreview.toggle()
                                             
                                         }
-                                        
                                     }
                                     .zIndex(1)
                                  */
@@ -518,6 +518,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     let zone = data["zone"] as? String ?? ""
                     let nrOfReports = data["nrOfReports"] as? Int ?? 0
                     let note = data["note"] as? String ?? ""
+                    let type = data["type"] as? String ?? ""
                     let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
                     return Spot(id: id, coordinate: coordinate, occupationRate: occupationRate, postedAt: postedAt, reporter: reporter, zone: zone, note: note, nrOfReports: nrOfReports)
@@ -542,7 +543,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 "reporter": UserDefaults.standard.object(forKey: "username")!,
                 "zone": zone,
                 "note": note,
-                "nrOfReports": 0
+                "nrOfReports": 0,
             ])
             if let image = image {
                 storage.reference().child(id).putData(image.jpegData(compressionQuality: 0.35)!, metadata: nil) { (_, err) in
@@ -814,6 +815,19 @@ struct GrowingButton4: ButtonStyle {
         //.frame(width: 30, height: 30)
             .foregroundColor(.neumorphictextColor)
             .background(Color(red: 255 / 255, green: 168 / 255, blue: 54 / 255))
+            .cornerRadius(10)
+            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
+            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.315), value: configuration.isPressed)
+    }
+}
+struct GrowingButton11: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        //.frame(width: 30, height: 30)
+            .foregroundColor(.neumorphictextColor)
+            .background(Color.white)
             .cornerRadius(10)
             .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
             .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
