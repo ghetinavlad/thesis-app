@@ -54,6 +54,8 @@
 		925C8C1827DAA68A00ED2403 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 925C8C1727DAA68A00ED2403 /* FirebaseFirestore */; };
 		92641F4327DD484B00AE971A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 92641F4227DD484B00AE971A /* FirebaseStorage */; };
 		92641F4527DD484B00AE971A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 92641F4427DD484B00AE971A /* FirebaseStorageCombine-Community */; };
+		926B1684282E753600BDA71A /* parkingApp_ThesisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B1683282E753600BDA71A /* parkingApp_ThesisUITests.swift */; };
+		926B1686282E753600BDA71A /* parkingApp_ThesisUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B1685282E753600BDA71A /* parkingApp_ThesisUITestsLaunchTests.swift */; };
 		9274572E27F9F1D200F098DB /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274572D27F9F1D200F098DB /* ImageView.swift */; };
 		9274573127FA0BFA00F098DB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9274573027FA0BFA00F098DB /* SDWebImageSwiftUI */; };
 		9274573327FA1B7700F098DB /* DetailsXViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274573227FA1B7700F098DB /* DetailsXViewModel.swift */; };
@@ -62,9 +64,27 @@
 		9289972527DE20FC0093B922 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289972427DE20FC0093B922 /* ImagePicker.swift */; };
 		92ABF1702803558800789E7F /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABF16F2803558800789E7F /* ModalView.swift */; };
 		92ACBE3B28033E3B00480A7E /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ACBE3A28033E3B00480A7E /* CheckInternetConnection.swift */; };
+		92AE0D8C282EDD860056E1DA /* parkingApp_ThesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AE0D8B282EDD860056E1DA /* parkingApp_ThesisTests.swift */; };
 		92B81D9D28020489009642DE /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B81D9C28020489009642DE /* MultilineTextField.swift */; };
 		92E3C19B280870F600F67AB7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 92E3C19A280870F600F67AB7 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		926B1687282E753600BDA71A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 925C8BEE27DAA24A00ED2403 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 925C8BF527DAA24A00ED2403;
+			remoteInfo = "parkingApp-Thesis";
+		};
+		92AE0D8D282EDD860056E1DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 925C8BEE27DAA24A00ED2403 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 925C8BF527DAA24A00ED2403;
+			remoteInfo = "parkingApp-Thesis";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9215992627E3BE8A0055EE2F /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
@@ -85,6 +105,9 @@
 		925C8C1027DAA30200ED2403 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		925C8C1227DAA30800ED2403 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		925C8C1427DAA51000ED2403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		926B1681282E753600BDA71A /* parkingApp-ThesisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "parkingApp-ThesisUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		926B1683282E753600BDA71A /* parkingApp_ThesisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parkingApp_ThesisUITests.swift; sourceTree = "<group>"; };
+		926B1685282E753600BDA71A /* parkingApp_ThesisUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parkingApp_ThesisUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9274572D27F9F1D200F098DB /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		9274573227FA1B7700F098DB /* DetailsXViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsXViewModel.swift; sourceTree = "<group>"; };
 		92747E2727E6141E0013D823 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -92,6 +115,8 @@
 		9289972427DE20FC0093B922 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		92ABF16F2803558800789E7F /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		92ACBE3A28033E3B00480A7E /* CheckInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
+		92AE0D89282EDD860056E1DA /* parkingApp-ThesisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "parkingApp-ThesisTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92AE0D8B282EDD860056E1DA /* parkingApp_ThesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parkingApp_ThesisTests.swift; sourceTree = "<group>"; };
 		92B81D9C28020489009642DE /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +161,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		926B167E282E753600BDA71A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92AE0D86282EDD860056E1DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -143,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				925C8BF827DAA24A00ED2403 /* parkingApp-Thesis */,
+				926B1682282E753600BDA71A /* parkingApp-ThesisUITests */,
+				92AE0D8A282EDD860056E1DA /* parkingApp-ThesisTests */,
 				925C8BF727DAA24A00ED2403 /* Products */,
 				92641F4127DD484B00AE971A /* Frameworks */,
 			);
@@ -152,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				925C8BF627DAA24A00ED2403 /* parkingApp-Thesis.app */,
+				926B1681282E753600BDA71A /* parkingApp-ThesisUITests.xctest */,
+				92AE0D89282EDD860056E1DA /* parkingApp-ThesisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +250,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		926B1682282E753600BDA71A /* parkingApp-ThesisUITests */ = {
+			isa = PBXGroup;
+			children = (
+				926B1683282E753600BDA71A /* parkingApp_ThesisUITests.swift */,
+				926B1685282E753600BDA71A /* parkingApp_ThesisUITestsLaunchTests.swift */,
+			);
+			path = "parkingApp-ThesisUITests";
+			sourceTree = "<group>";
+		};
 		92747E2627E614030013D823 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +277,14 @@
 				9289972227DE16DB0093B922 /* AddSpotView.swift */,
 			);
 			path = AddSpot;
+			sourceTree = "<group>";
+		};
+		92AE0D8A282EDD860056E1DA /* parkingApp-ThesisTests */ = {
+			isa = PBXGroup;
+			children = (
+				92AE0D8B282EDD860056E1DA /* parkingApp_ThesisTests.swift */,
+			);
+			path = "parkingApp-ThesisTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +342,42 @@
 			productReference = 925C8BF627DAA24A00ED2403 /* parkingApp-Thesis.app */;
 			productType = "com.apple.product-type.application";
 		};
+		926B1680282E753600BDA71A /* parkingApp-ThesisUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 926B168B282E753600BDA71A /* Build configuration list for PBXNativeTarget "parkingApp-ThesisUITests" */;
+			buildPhases = (
+				926B167D282E753600BDA71A /* Sources */,
+				926B167E282E753600BDA71A /* Frameworks */,
+				926B167F282E753600BDA71A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				926B1688282E753600BDA71A /* PBXTargetDependency */,
+			);
+			name = "parkingApp-ThesisUITests";
+			productName = "parkingApp-ThesisUITests";
+			productReference = 926B1681282E753600BDA71A /* parkingApp-ThesisUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		92AE0D88282EDD860056E1DA /* parkingApp-ThesisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92AE0D91282EDD860056E1DA /* Build configuration list for PBXNativeTarget "parkingApp-ThesisTests" */;
+			buildPhases = (
+				92AE0D85282EDD860056E1DA /* Sources */,
+				92AE0D86282EDD860056E1DA /* Frameworks */,
+				92AE0D87282EDD860056E1DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92AE0D8E282EDD860056E1DA /* PBXTargetDependency */,
+			);
+			name = "parkingApp-ThesisTests";
+			productName = "parkingApp-ThesisTests";
+			productReference = 92AE0D89282EDD860056E1DA /* parkingApp-ThesisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -289,11 +385,19 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					925C8BF527DAA24A00ED2403 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					926B1680282E753600BDA71A = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 925C8BF527DAA24A00ED2403;
+					};
+					92AE0D88282EDD860056E1DA = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 925C8BF527DAA24A00ED2403;
 					};
 				};
 			};
@@ -317,6 +421,8 @@
 			projectRoot = "";
 			targets = (
 				925C8BF527DAA24A00ED2403 /* parkingApp-Thesis */,
+				926B1680282E753600BDA71A /* parkingApp-ThesisUITests */,
+				92AE0D88282EDD860056E1DA /* parkingApp-ThesisTests */,
 			);
 		};
 /* End PBXProject section */
@@ -329,6 +435,20 @@
 				925C8C0127DAA24C00ED2403 /* Preview Assets.xcassets in Resources */,
 				925C8BFE27DAA24C00ED2403 /* Assets.xcassets in Resources */,
 				925C8C1527DAA51000ED2403 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		926B167F282E753600BDA71A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92AE0D87282EDD860056E1DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +483,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		926B167D282E753600BDA71A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				926B1684282E753600BDA71A /* parkingApp_ThesisUITests.swift in Sources */,
+				926B1686282E753600BDA71A /* parkingApp_ThesisUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92AE0D85282EDD860056E1DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92AE0D8C282EDD860056E1DA /* parkingApp_ThesisTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		926B1688282E753600BDA71A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 925C8BF527DAA24A00ED2403 /* parkingApp-Thesis */;
+			targetProxy = 926B1687282E753600BDA71A /* PBXContainerItemProxy */;
+		};
+		92AE0D8E282EDD860056E1DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 925C8BF527DAA24A00ED2403 /* parkingApp-Thesis */;
+			targetProxy = 92AE0D8D282EDD860056E1DA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		925C8C0227DAA24C00ED2403 /* Debug */ = {
@@ -546,6 +696,80 @@
 			};
 			name = Release;
 		};
+		926B1689282E753600BDA71A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-ThesisUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "parkingApp-Thesis";
+			};
+			name = Debug;
+		};
+		926B168A282E753600BDA71A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-ThesisUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "parkingApp-Thesis";
+			};
+			name = Release;
+		};
+		92AE0D8F282EDD860056E1DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-ThesisTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/parkingApp-Thesis.app/parkingApp-Thesis";
+			};
+			name = Debug;
+		};
+		92AE0D90282EDD860056E1DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C3CSFK3TKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "VladGhetina.parkingApp-ThesisTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/parkingApp-Thesis.app/parkingApp-Thesis";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -563,6 +787,24 @@
 			buildConfigurations = (
 				925C8C0527DAA24C00ED2403 /* Debug */,
 				925C8C0627DAA24C00ED2403 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		926B168B282E753600BDA71A /* Build configuration list for PBXNativeTarget "parkingApp-ThesisUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				926B1689282E753600BDA71A /* Debug */,
+				926B168A282E753600BDA71A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92AE0D91282EDD860056E1DA /* Build configuration list for PBXNativeTarget "parkingApp-ThesisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92AE0D8F282EDD860056E1DA /* Debug */,
+				92AE0D90282EDD860056E1DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

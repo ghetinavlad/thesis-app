@@ -454,6 +454,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var isReportLoading = false
     @Published var hasAlreadyReported = false
     @Published var isLoadingDistance = false
+    @Published var addedSuccessfully = false
     let queue = DispatchQueue(label: "Monitor")
     @ObservedObject var networkingViewModel = InternetConnectionObserver()
     
@@ -531,7 +532,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         
     }
     
-    func addParkingSpot(occupationRate: Int, zone: String, note: String, image: UIImage?) {
+    func addParkingSpot(occupationRate: Int, zone: String, note: String, image: UIImage?, latitude: Double = 46.770439, longitude: Double = 23.591423, reporter: String = "error") {
         var id = randomString()
         if let coordinates = locationManager?.location!.coordinate {
             db.collection("spots").addDocument(data: [
@@ -555,6 +556,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 }
             }
         }
+        self.addedSuccessfully = true
     }
     
     func addReporterToList(id: String) {
