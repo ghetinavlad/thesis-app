@@ -38,8 +38,8 @@ struct MapView: View {
     @StateObject private var viewModel = MapViewModel()
     @State var center = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770439, longitude: 23.591423), span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045))
     @State var radius: CGFloat = 0.5
-    @State var lat: Double = 0.2
-    @State var long: Double = 0.2
+    @State var lat: Double = 0.21
+    @State var long: Double = 0.21
     @State var isHiddenPreview: Bool = true
     @State var selectedPin: String = ""
     @State var showDetails: Bool = false
@@ -92,7 +92,7 @@ struct MapView: View {
                                 }
                                 Spacer()
                                 HStack{
-                                    Text("8 mins ago")
+                                    Text("11 mins ago")
                                         .font(.system(size: 12))
                                         .foregroundColor(Color.black)
                                         .fontWeight(.light)
