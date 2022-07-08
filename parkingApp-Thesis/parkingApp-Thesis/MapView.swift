@@ -254,6 +254,15 @@ func getCurrentTime() -> String {
     return romanianTime
 }
 
+func testMerge() {
+    print("Test merge")
+    print("Test merge")
+    print("Test merge")
+    print("Test merge")
+    print("Test merge")
+    print("Test merge")
+}
+
 func getTimeLeft(time: String) -> String{
     
     let delimiter = ":"
